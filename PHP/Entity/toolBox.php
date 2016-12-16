@@ -1,39 +1,35 @@
 <?php
 
-function static macCheck($mac){
-    if ( preg_match('/([a-fA-F0-9]{2}[:|\-]?){6}/', $mac) )
-    {
+echo(macCheck("2A-3C-5a-f6-b6-f3"));
 
-        try{
-            macFormat($mac);
+function macCheck($mac)
+{
+
+    if (preg_match('/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/', $mac) || preg_match('/([a-fA-F0-9]{12})/', $mac)) {
+
+        try {
+            return macFormat($mac);
+        } catch (Exception $e) {
+            throw new Exception('Formatage impossible');
         }
-        catch{
-            throw new Exeption('Formatage impossible');
-        }
-        
-    } else {
-        throw new Exeption('Le paterne ne correspond pas');
-    }
+
+  } else {
+     throw new Exception('Le paterne ne correspond pas');
+
+  }
 }
 
 
 
-function static macFormat($mac){
-    for(int i = 0, i<strlen($mac, i++){
-        $macPur="";
-        if(substr($mac,i) == preg_match('/([a-fA-F0-9]/'){
-            $macPur += substr($mac,i);
+function macFormat($mac){
+    $macPur="";
+    for($i = 0; $i<strlen($mac); $i++){
+        $submac = substr($mac,$i,1);
+        if(preg_match('/([a-fA-F0-9])/', $submac)){
+            $macPur .= $submac;
         }
-
-
     }
-
-for(int i = 0, i<strlen($macPur, i++){
-        if(substr($macPur,i) == preg_match( '/([A-F])/', $macPur)){
-            substr_replace($macPur,strtolower(substr($macPur,i,1),0));
-        }
-}
-
+    $macPur = strtolower($macPur);
     return $macPur;
 
 } 
