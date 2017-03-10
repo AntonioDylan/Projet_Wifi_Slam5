@@ -5,7 +5,6 @@
 	<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-
 		<?php include("nav.php") ?>
 	    <!-- Begin page content -->
 	    <div class="container">
@@ -14,10 +13,10 @@
 	      </div>
 				<div class="panel panel-default">
 				  <!-- Default panel contents -->
-				  <div class="panel-heading">Inventaire des périphériques - <?php echo $_SESSION['login']; ?></div>
+				  <div class="panel-heading">Inventaire des périphériques - <?php echo $_SESSION['username']; ?></div>
 
 				  <!-- Table -->
-					<table class="table">
+					<table class="table table-striped">
 					   <thead>
 					      <tr>
 					         <th>#</th>
