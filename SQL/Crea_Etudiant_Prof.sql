@@ -7,8 +7,8 @@ CREATE TABLE  port_etudiant  (
   mdp  char(32) NOT NULL,
   numexam  char(16) DEFAULT NULL,
   valide  char(1) NOT NULL DEFAULT 'O',
- PRIMARY KEY ( num ),
- KEY  ietudgrou  ( numGroupe )
+ KEY  ietudgrou  ( numGroupe ),
+ PRIMARY KEY (num)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE  port_professeur  (
@@ -19,19 +19,7 @@ CREATE TABLE  port_professeur  (
   mdp  char(32) NOT NULL,
   niveau  int(11) NOT NULL,
   valide  char(1) DEFAULT 'O',
- PRIMARY KEY ( num )
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE  adresse_mac  (
-  id  int(11) NOT NULL AUTO_INCREMENT,
-  numEtudiant  char(32) NOT NULL,
-  libelle  char(32) NOT NULL,
-  addr  char(12) NOT NULL,
-  etat int(1) NOT NULL DEFAULT 0,
- PRIMARY KEY ( num ),
- FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num),
- FOREIGN KEY (etat) REFERENCES etat_traitement(id)
+   PRIMARY KEY (num)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE etat_traitement  (
@@ -40,3 +28,13 @@ CREATE TABLE etat_traitement  (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE  adresse_mac  (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  numEtudiant  int(11) NOT NULL,
+  libelle  char(32) NOT NULL,
+  addr  char(12) NOT NULL,
+  etat int(1) NOT NULL,
+  PRIMARY KEY (id),
+ FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num),
+ FOREIGN KEY (etat) REFERENCES etat_traitement(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
