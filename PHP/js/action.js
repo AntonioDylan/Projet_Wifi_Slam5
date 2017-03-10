@@ -1,0 +1,7 @@
+//
+//
+function SupprimerPeripherique(selection) {
+
+
+
+}

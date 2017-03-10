@@ -1,6 +1,11 @@
-span.important {
+span.importantr {
     color: red;
-    font-size: 120%;
+    font-size: 100%;
+}
+
+span.importantg {
+    color: green;
+    font-size: 100%;
 }
 
  #txt_gauche {
