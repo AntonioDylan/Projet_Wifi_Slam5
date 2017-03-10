@@ -1,93 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-	<div class="form-style-10">
-		<h1>Demande d'accès au Wifi<span>Faites votre demande directement via ce formulaire !</span></h1>
-		<form>
 
-			<div class="section"><span>1</span>Vos Enregistrements</div>
-			<div class="inner-wrap">
-				<label>Vos Adresses MAC:</label>
-				<table class="pure-table">
-					<thead>
-						<tr>
-							<th style="width:10px">#</th>
-							<th style="width:400px">Nom</th>
-							<th>Adresse mac</th>
-						</tr>
-					</thead>
+	    <!-- Fixed navbar -->
+	    <nav class="navbar navbar-default navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#">Gestion Wifi</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="#">Accueil</a></li>
+	            <li><a href="#about">A propos</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
 
-					<tbody>
-						<tr class="pure-table-odd">
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td >MMyysdfsdfsdfsdfsdfsdfsdfsdfsdfsfsdfsdfMMM</td>
-							<td>a5:z4:f2:15:az:7e</td>
-						</tr>
+	    <!-- Begin page content -->
+	    <div class="container">
+	      <div class="page-header">
+	        <h1>Gestion des périphériques:</h1>
+	      </div>
+				<div class="panel panel-default">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Existant:</div>
 
-						<tr>
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Toyota</td>
-							<td>Camry</td>
-						</tr>
-
-						<tr class="pure-table-odd">
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Hyundai</td>
-							<td>Elantra</td>
-						</tr>
-
-						<tr>
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Ford</td>
-							<td>Focus</td>
-						</tr>
-
-						<tr class="pure-table-odd">
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Nissan</td>
-							<td>Sentra</td>
-						</tr>
-
-						<tr>
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>BMW</td>
-							<td>M3</td>
-						</tr>
-
-						<tr class="pure-table-odd">
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Honda</td>
-							<td>Civic</td>
-						</tr>
-
-						<tr>
-							<td><a href="#"><img src="./img/remove.png" alt="Supprimer adresse MAC"></a></td>
-							<td>Kia</td>
-							<td>Soul</td>
-						</tr>
-					</tbody>
-				</table>
+				  <!-- Table -->
+				  <table class="table">
+<thead> <tr> <th>#</th> <th>First Name</th> <th>Last Name</th> <th>Username</th> </tr> </thead>
+<tbody> <tr> <th scope="row">1</th> <td>Mark</td> <td>Otto</td> <td>@mdo</td> </tr> <tr> <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr> <tr> <th scope="row">3</th> <td>Larry</td> <td>the Bird</td> <td>@twitter</td> </tr> </tbody>
+				  </table>
+				</div>
 			</div>
 
+	    <footer class="footer">
+	      <div class="container">
+	        <p class="text-muted">Place sticky footer content here.</p>
+	      </div>
+	    </footer>
 
 
-			<div class="section"><span>2</span>Ajouter Une Adresse<!--  &amp;  --></div>
-			<div class="inner-wrap">
-				<label>Libellé<span class="important"> *</span><span class="important" id="txt_gauche">Limité à 20 caractères</span><input type="text" name="field1" value="pc portable 810" /></label>
-				<label>Adresse MAC<span class="important"> *</span><input type="text" name="field2" value="a5:z4:f2:15:az:7e" /></label>
-			</div>
+	    <!-- Bootstrap core JavaScript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+	    <script src="../../dist/js/bootstrap.min.js"></script>
+	    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-
-			<div class="button-section">
-				<input type="submit" name="Sign Up" />
-				<span class="privacy-policy">
-					<input type="checkbox" name="field3">Je certifie l'exactitude des informations. 
-				</span>
-			</div>
-		</form>
-	</div>
 </body>
-

@@ -28,6 +28,15 @@ CREATE TABLE  adresse_mac  (
   numEtudiant  char(32) NOT NULL,
   libelle  char(32) NOT NULL,
   addr  char(12) NOT NULL,
+  etat int(1) NOT NULL DEFAULT 0,
  PRIMARY KEY ( num ),
- FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num)
+ FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num),
+ FOREIGN KEY (etat) REFERENCES etat_traitement(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE etat_traitement  (
+  id int(1) NOT NULL AUTO_INCREMENT,
+  libelle char(12) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
