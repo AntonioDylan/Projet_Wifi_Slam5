@@ -1,21 +1,27 @@
 <?php
-$dbh = null;
+/**
+* Base de donnée
+*/
 
-connection();
-function connection(){
+class Bdd 
+{
+  private $host = 'localhost';
+  private $username = 'root';
+  private $password = 'root';
+  private $bdd = 'wifi';
+  public $pdo = null;
 
-  $host = '10.30.3.4';
-  $username = 'root';
-  $password = '';
-  $bdd = 'client';
-
+  public function __construct()
+  {
     try {
-      $dbh = new PDO('mysql:host='.$host.';dbname='.$bdd, $username, $password);
-      }
- catch (PDOException $e) {
+      $options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+      $options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8";
+      $this->pdo = new PDO('mysql:host='.$this->host.';dbname='.$this->bdd, $this->username, $this->password, $options);
+    }
+    catch (PDOException $e) {
       print "Erreur !: " . $e->getMessage() . "<br/>";
       die();
+    }
   }
 }
-
- ?>
+?>
