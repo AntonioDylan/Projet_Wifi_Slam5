@@ -8,6 +8,7 @@
    <body>
       <?php 
          include("nav.php");
+         include("login.php");
       ?>
 
       <!-- Conteneur -->
@@ -20,7 +21,9 @@
                </div>
                <?php
 
-               if (isset($_SESSION['ERREUR']) && $_SESSION['ERREUR'] == 'T'){ ?>
+               if (isset($_SESSION['ERREUR']) && $_SESSION['ERREUR'] == 'T'){ 
+                  
+                  ?>
                   <div id="unknow" class="alert alert-danger" style="margin:20px;margin-bottom:0px;"role="alert">
                      <center>Compte inexistant !</center>
                   </div>

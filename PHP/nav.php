@@ -2,11 +2,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="">Gestion Wifi</a>
+      <a class="navbar-brand" href="#">Gestion Wifi</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Authentification</a></li>
+        <li class=""><a href="auth.php">Authentification</a></li>
 
         <?php
           if (isset($_SESSION['MAIL'])) { ?>

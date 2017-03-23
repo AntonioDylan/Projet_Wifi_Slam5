@@ -6,77 +6,92 @@
 	<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
+	<?php 
+	include("nav.php");
+	include("config.php");
+	?>
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="page-header">
+			<h1>Gestion des périphériques</h1>
+		</div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">Inventaire des périphériques - 
+				<?php 
+				if(isset($_SESSION['NOM'])){
+					echo $_SESSION['NOM'].' '.$_SESSION['PRENOM'];
+				}
+				?>
+			</div>
 
-		<?php include("nav.php") ?>
-	    <!-- Begin page content -->
-	    <div class="container">
-	      <div class="page-header">
-	        <h1>Gestion des périphériques</h1>
-	      </div>
-				<div class="panel panel-default">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading">Inventaire des périphériques - <?php echo $_SESSION['login']; ?></div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Propriétaire</th>
+						<th>Adresse MAC</th>
+						<th>Statut</th>
+						<th style="width:10%;">Supprimer</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<?php 
+					// Requête
+					$db = new Bdd();
+					$query = $db->pdo->prepare('select * from adresse_mac inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant where adresse_mac.numEtudiant=:num');
+					$query->bindParam(':num', $_SESSION['ID'], PDO::PARAM_INT);
+					$query->execute();
 
-				<table class="table table-striped">
-				   <thead>
-				      <tr>
-				         <th>Propriétaire</th>
-				         <th>Adresse MAC</th>
-				         <th>Statut</th>
-				         <th style="width:10%;">Supprimer</th>
-				      </tr>
-				   </thead>
-				  // Lister adresses MAC
-				   <tbody>
-				      <tr>
-				  <?php 
+					if($query->rowCount() > 0) {
+						while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 
-				  
+							$etat = array();
+							if ($row['etat'] == 1){
+								$etat['label'] = 'success';
+								$etat['valeur'] = 'Actif';
+							}
+							else{
+								$etat['label'] = 'danger';
+								$etat['valeur'] = 'Inatif';
+							}
+							
+							echo "<tr>";
+							echo "<td>" . $row['nom'].' '.$row['prenom'] . "</td>";
+							echo "<td>" . $row['addr'] . "</td>";
+							echo "<td><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
+							echo "<td class=\"text-center\"><a href=\"#\"><img src=\"img/remove.png\" alt=\"Retirer périphérique\"></a></td>";
+							echo "</tr>";
+					    }
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
 
-				  foreach ($array as $key) {
-				  	
-				  }
+		<!-- Ajouter Periph -->
 
 
-
-				  ?>
-
-				  <!-- Table -->
-					      <tr>
-					<table class="table table-striped">
-					   <thead>
-					         <th>#</th>
-					         <th>Propriétaire</th>
-					         <th>Statut</th>
-					         <th>Adresse MAC</th>
-					      </tr>
-					   <tbody>
-					   </thead>
-					      <tr>
-					         <th scope="row"><img src="img/remove.png" alt="Retirer périphérique"></th>
-					         <td>Rémy</td>
-					         <td>5E:FF:56:A2:AF:15</td>
-					         <td><span class="label label-success">Actif</span></td>
-					         <th class="text-center" scope="row"><a href="#" onclick="JS"><img src="img/remove.png" alt="Retirer périphérique"></a></th>
-
-					      </tr>
-					      <tr>
-					         <td>Jacob</td>
-					         <td>Thornton</td>
-					         <td><span class="label label-success">Actif</span></td>
-					         <th class="text-center" scope="row"><a href="#" onclick="JS"><img src="img/remove.png" alt="Retirer périphérique"></a></th>
-					      </tr>
-					      <tr>
-					         <td>Larry</td>
-					         <td>the Bird</td>
-					         <td><span class="label label-danger">Inactif</span></td>
-					         <th class="text-center" scope="row"><a href="#" onclick="JS"><img src="img/remove.png" alt="Retirer périphérique"></a></th>
-					      </tr>
-					   </tbody>
-					</table>
+		<div class="page-header">
+			<h1>Ajouter périphérique</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+			<div class="well">
+				<form class="form-horizontal">
+				    <label class="control-label" for="email">Adresse MAC:</label>
+					<input type="text" class="form-control" placeholder="Adresse Email">
+					<hr>
+					<center><button type="submit" class="btn btn-default">Ajouter</button></center>
+				</form>
 				</div>
 			</div>
+		</div>
+
+	</div>
+
+
 			
-      <!-- Footer -->
-      <?php include("footer.php") ?>
+	<!-- Footer -->
+	<?php include("footer.php") ?>
 </body>

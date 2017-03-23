@@ -1,6 +1,3 @@
-/*
- * Classe Login
-
 <?php
 class Login
 {
@@ -18,6 +15,7 @@ class Login
       $_SESSION['MAIL'] = $mail;
       $_SESSION['NOM'] = $result['nom'];
       $_SESSION['PRENOM'] = $result['prenom'];
+      $_SESSION['ID'] = $result['num'];
       $_SESSION['USER_SESSION'] = hash('sha256', $mail, false);
       $_SESSION['ERREUR'] = 'F';
       header('location:peripherique.php');
@@ -40,11 +38,7 @@ class Login
 
   public function Deconnexion(){
     session_destroy();
-    unset($_SESSION['user_session']);
-    unset($_SESSION['MAIL'] = $mail;
-    unset($_SESSION['NOM'] = $result['nom'];
-    unset($_SESSION['PRENOM'] = $result['prenom'];
-    unset($_SESSION['USER_SESSION'] = hash('sha256', $mail, false);
+    //unset($_SESSION['USER_SESSION'] = hash('sha256', $mail, false);
     return true;
   }
 }

@@ -1,6 +1,7 @@
 <?php
-
-namespace Controlers\Database;
+/**
+* Base de donnée
+*/
 
 class Bdd 
 {
@@ -14,10 +15,7 @@ class Bdd
   {
     try {
       $options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-
-      // Gestion des accents utf-8
       $options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8";
-      
       $this->pdo = new PDO('mysql:host='.$this->host.';dbname='.$this->bdd, $this->username, $this->password, $options);
     }
     catch (PDOException $e) {
