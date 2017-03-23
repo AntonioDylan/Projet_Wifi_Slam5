@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 require 'controlers/autoload.php'; 
 
 Autoloader::register(); 
