@@ -1,16 +1,22 @@
-<?php session_start(); ?>
+<?php 
+
+use Database;
+
+session_start(); 
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<link rel="stylesheet" href="./css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+
 	<?php 
 	include("nav.php");
-	include("config.php");
 	?>
-	<!-- Begin page content -->
+
 	<div class="container">
 		<div class="page-header">
 			<h1>Gestion des périphériques</h1>
@@ -39,7 +45,11 @@
 					<?php 
 					// Requête
 					$db = new Bdd();
-					$query = $db->pdo->prepare('select * from adresse_mac inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant where adresse_mac.numEtudiant=:num');
+					$query = $db->pdo->prepare('select * 
+												from adresse_mac 
+												inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant 
+												where adresse_mac.numEtudiant=:num');
+
 					$query->bindParam(':num', $_SESSION['ID'], PDO::PARAM_INT);
 					$query->execute();
 
@@ -62,7 +72,7 @@
 							echo "<td><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
 							echo "<td class=\"text-center\"><a href=\"#\"><img src=\"img/remove.png\" alt=\"Retirer périphérique\"></a></td>";
 							echo "</tr>";
-					    }
+						}
 					}
 					?>
 				</tbody>
@@ -77,13 +87,13 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
-			<div class="well">
-				<form class="form-horizontal">
-				    <label class="control-label" for="email">Adresse MAC:</label>
-					<input type="text" class="form-control" placeholder="Adresse Email">
-					<hr>
-					<center><button type="submit" class="btn btn-default">Ajouter</button></center>
-				</form>
+				<div class="well">
+					<form class="form-horizontal">
+						<label class="control-label" for="email">Adresse MAC:</label>
+						<input type="text" class="form-control" placeholder="Adresse Email">
+						<hr>
+						<center><button type="submit" class="btn btn-default">Ajouter</button></center>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -91,7 +101,7 @@
 	</div>
 
 
-			
+
 	<!-- Footer -->
 	<?php include("footer.php") ?>
 </body>

@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Session;
+
 class Login
 {
   public function __construct($mail, $password, $cnx)

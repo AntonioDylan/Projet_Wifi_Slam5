@@ -1,17 +1,24 @@
-<?php session_start(); ?>
+<?php 
+
+use Controlers\Session;
+
+session_start(); 
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
    <head>
-      <link rel="stylesheet" href="./css/bootstrap.min.css">
-      <link rel="stylesheet" href="./css/styles.css">
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/styles.css">
    </head>
    <body>
       <?php 
          include("nav.php");
-         include("login.php");
       ?>
 
-      <!-- Conteneur -->
       <div class="container">
 
          <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

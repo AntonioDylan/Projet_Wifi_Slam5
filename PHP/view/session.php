@@ -1,10 +1,12 @@
 <?php 
-/*
- * Démarrage de la session sécurisé
-*/
+use App\Database;
+use App\Session;
+
 session_start();
-include("config.php");
-include('login.php');
+
+require '../autoload.php'; 
+
+Autoloader::register(); 
 
 $db = new Bdd();
 $mel = filter_var($_POST["adressemel"], FILTER_SANITIZE_EMAIL);

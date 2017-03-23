@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Database;
+
 /**
  * Sauvegarde MySQL
  *
@@ -8,7 +11,6 @@
  * @link	http://www.ab-d.fr/
  *
  */
-
 
 error_reporting(E_ALL);
 ini_set('display_errors', true);
