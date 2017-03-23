@@ -6,10 +6,8 @@
 	<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-		<?php 
-		include("nav.php");
-		include("config.php");
-		?>
+
+		<?php include("nav.php") ?>
 	    <!-- Begin page content -->
 	    <div class="container">
 	      <div class="page-header">
@@ -17,12 +15,7 @@
 	      </div>
 				<div class="panel panel-default">
 				  <!-- Default panel contents -->
-				  <div class="panel-heading">Inventaire des périphériques - 
-				  <?php 
-				  if(isset($_SESSION['NOM'])){
-				  	echo $_SESSION['NOM'].' '.$_SESSION['PRENOM'];
-				  }
-				  ?></div>
+				  <div class="panel-heading">Inventaire des périphériques - <?php echo $_SESSION['login']; ?></div>
 
 				<table class="table table-striped">
 				   <thead>
@@ -49,7 +42,18 @@
 				  ?>
 
 				  <!-- Table -->
-
+					      <tr>
+					<table class="table table-striped">
+					   <thead>
+					         <th>#</th>
+					         <th>Propriétaire</th>
+					         <th>Statut</th>
+					         <th>Adresse MAC</th>
+					      </tr>
+					   <tbody>
+					   </thead>
+					      <tr>
+					         <th scope="row"><img src="img/remove.png" alt="Retirer périphérique"></th>
 					         <td>Rémy</td>
 					         <td>5E:FF:56:A2:AF:15</td>
 					         <td><span class="label label-success">Actif</span></td>
