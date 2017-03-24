@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controlers\Database;
 
 class Bdd 
 {
   private $host = 'localhost';
   private $username = 'root';
-  private $password = 'root';
+  private $password = '';
   private $bdd = 'wifi';
   public $pdo = null;
 

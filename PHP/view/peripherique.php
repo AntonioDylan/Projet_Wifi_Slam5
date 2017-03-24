@@ -1,7 +1,5 @@
 <?php 
-
-use Database;
-
+require('../controlers/Bdd.php');
 session_start(); 
 
 ?>
@@ -89,8 +87,8 @@ session_start();
 			<div class="col-md-4 col-md-offset-4">
 				<div class="well">
 					<form class="form-horizontal">
-						<label class="control-label" for="email">Adresse MAC:</label>
-						<input type="text" class="form-control" placeholder="Adresse Email">
+						<label class="control-label" for="mac">Adresse MAC:</label>
+						<input type="text" class="form-control" placeholder="Adresse MAC">
 						<hr>
 						<center><button type="submit" class="btn btn-default">Ajouter</button></center>
 					</form>

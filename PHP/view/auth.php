@@ -1,7 +1,5 @@
 <?php 
 
-use Controlers\Session;
-
 session_start(); 
 
 ?>
