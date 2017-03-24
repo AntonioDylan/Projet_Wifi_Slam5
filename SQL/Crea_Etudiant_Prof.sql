@@ -22,12 +22,6 @@ CREATE TABLE  port_professeur  (
    PRIMARY KEY (num)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE etat_traitement  (
-  id int(1) NOT NULL AUTO_INCREMENT,
-  libelle char(12) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE  adresse_mac  (
   id int(11) NOT NULL AUTO_INCREMENT,
   numEtudiant  int(11) NOT NULL,
@@ -36,5 +30,4 @@ CREATE TABLE  adresse_mac  (
   etat int(1) NOT NULL,
   PRIMARY KEY (id),
  FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num),
- FOREIGN KEY (etat) REFERENCES etat_traitement(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

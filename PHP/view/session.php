@@ -1,6 +1,6 @@
 <?php 
-use App\Database;
-use App\Session;
+require('../controlers/Bdd.php');
+require('../controlers/Login.php');
 
 session_start();
 
