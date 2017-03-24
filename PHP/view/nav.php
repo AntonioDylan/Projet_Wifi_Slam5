@@ -6,15 +6,23 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class=""><a href="auth.php">Authentification</a></li>
+
 
         <?php
           if (isset($_SESSION['MAIL'])) { ?>
+
             <li class=""><a href="peripherique.php">Périphériques</a></li>
+            <li class=""><a href="../controlers/logout.php">Déconnexion</a></li>
+
           <?php
           }
+          else{
+            ?>
+            <li class=""><a href="auth.php">Authentification</a></li>
+            <?php
+          }
           ?>
-        
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plus<span class="caret"></span></a>
           <ul class="dropdown-menu">
