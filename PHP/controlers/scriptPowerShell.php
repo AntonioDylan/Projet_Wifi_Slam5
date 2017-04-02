@@ -31,8 +31,47 @@
     fclose($monfichier);
   }
 
+  function getUserIP()
+  {
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = $_SERVER['REMOTE_ADDR'];
+
+    if(filter_var($client, FILTER_VALIDATE_IP))
+    {
+      $ip = $client;
+    }
+    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    {
+      $ip = $forward;
+    }
+    else
+    {
+      $ip = $remote;
+    }
+
+    return $ip;
+  }
+
+  function ipNormalize($ip_source){ // 10.10.130.111
+    try {
+      $split = explode('.', $ip_source); 
+      $ip = $split[3];// 111
+      return $ip;
+    } catch (Exception $e) {
+      echo "Adresse ip invalide.";
+      return 0;
+    }
+    
+
+    
+  }
+
+
+/*
   reserveAdresseDHCP(111,534564156461,"test","test");
   supprimeAdresseDHCP("test",534564156461);
   reserveAdresseCisco(534564156461);
   supprimeAdresseCisco();
+  */
 ?>

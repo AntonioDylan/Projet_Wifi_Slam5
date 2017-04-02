@@ -5,10 +5,9 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/styles.css">
-</head>
+<?php 
+include("header.php");
+?>
 <body>
 
 	<?php
@@ -17,96 +16,135 @@ session_start();
 
 	<div class="container">
 
+		<?php
+			// Check erreur mac
+		if (isset($_SESSION['erreurMac'])){
+			unset($_SESSION['erreurMac']);
+			?>
+			<div class="alert alert-danger alert-dismissable fade in" style="margin:20px;margin-bottom:0px;"role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<center><i class="glyphicon glyphicon-remove"></i> <strong>Mauvaise adresse mac !</strong></center>
+			</div>
 			<?php
-			if (isset($_SESSION['erreurMac']) && $_SESSION['erreurMac'] != null){
-				?>
-					<div class="alert alert-danger" style="margin:20px;margin-bottom:0px;"role="alert">
 
-						 <center><i class="glyphicon glyphicon-lock"></i> <strong>Mauvaise adresse mac !</strong></center>
-					</div>
+		}
+
+		// Requête
+		$db = new Bdd();
+		$id = $_SESSION['ID'];
+		$query = $db->pdo->prepare('select *
+			from adresse_mac
+			inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant
+			where adresse_mac.numEtudiant=:num');
+
+		$query->bindParam(':num', $id, PDO::PARAM_INT);
+		$query->execute();
+
+			// Aucune adresse MAC
+		if($query->rowCount() == 0){
+			$_SESSION['noMacAddress'] = true;
+		}
+		else{
+			$_SESSION['noMacAddress'] = false;
+			
+			?>
+			<div class="page-header">
+				<h1><i class="glyphicon glyphicon-list"></i> Gestion des périphériques <span class="badge"><?php echo $query->rowCount() ?></span></h1>
+			</div>
+			<div class="panel panel-info">
+				<!-- Default panel contents -->
+				<div class="panel-heading"><strong>
 					<?php
-					unset($_SESSION['erreurMac']);
+					if(isset($_SESSION['NOM'])){
+						echo $_SESSION['NOM'].' '.$_SESSION['PRENOM'];
+					}
+					?></strong>
+				</div>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Libellé</th>
+							<th>Adresse MAC</th>
+							<th>Date</th>
+							<th>Statut</th>
+							<th style="width:10%;">Supprimer</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<?php
+
+
+						if($query->rowCount() > 0) {
+							while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+
+								$etat = array();
+								if ($row['etat'] == 1){
+									$etat['label'] = 'success';
+									$etat['valeur'] = 'Actif';
+								}
+								else{
+									$etat['label'] = 'danger';
+									$etat['valeur'] = 'Inactif';
+								}
+								echo "<tr>";
+								echo "<td id=". $id .">" . $row['libelle'] . "</td>";
+								echo "<td id=". $id .">" . $row['addr'] . "</td>";
+
+								$date = $row['date'];
+								$timestamp = strtotime($date);
+								$date_formated = date('Y-m-d H:i:s', $timestamp);
+								//echo $date_formated;
+								echo "<td id=". $id .">Le " . $row['date']  . " à " . $date[1] . "</td>";
+								
+								echo "<td id=". $id ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
+								echo "<td id=". $id ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['id']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
+								echo "</tr>";
+							}
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+			<?php 
+		}
+		?>
+
+		<!-- Ajouter Periph -->
+		<div class="page-header">
+			<h1><i class="glyphicon glyphicon-check"></i> Ajouter périphérique</h1>
+		</div>
+		<div class="row">
+
+			<?php
+			if (isset($_SESSION['noMacAddress']) && $_SESSION['noMacAddress']){
+				?>
+				<div class="col-md-6 col-md-offset-3">
+					<div class="bs-callout"> 
+						<div class="col-md-2 col-xs-2 col-sm-1">
+							<span class="glyphicon glyphicon-plus" style="color: #333;font-size: 2.2em;" aria-hidden="true"></span>
+						</div>
+
+						<h4>C'est ici que l'on ajoute de nouveau périphérique !</h4>
+						<p>Entrez l'adresse MAC de votre périphérique pour l'enregistrer sur la borne.</p>
+					</div>
+				</div>
+				<?php
 			}
 			?>
 
-
-		<div class="page-header">
-			<h1>Gestion des périphériques</h1>
-		</div>
-		<div class="panel panel-default">
-			<!-- Default panel contents -->
-			<div class="panel-heading">Inventaire des périphériques -
-				<?php
-				if(isset($_SESSION['NOM'])){
-					echo $_SESSION['NOM'].' '.$_SESSION['PRENOM'];
-				}
-				?>
-			</div>
-
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Libellé</th>
-						<th>Adresse MAC</th>
-						<th>Statut</th>
-						<th style="width:10%;">Supprimer</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<?php
-					// Requête
-					$db = new Bdd();
-					$id = $_SESSION['ID'];
-					$query = $db->pdo->prepare('select *
-												from adresse_mac
-												inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant
-												where adresse_mac.numEtudiant=:num');
-
-					$query->bindParam(':num', $id, PDO::PARAM_INT);
-					$query->execute();
-
-					if($query->rowCount() > 0) {
-						while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-
-							$etat = array();
-							if ($row['etat'] == 1){
-								$etat['label'] = 'success';
-								$etat['valeur'] = 'Actif';
-							}
-							else{
-								$etat['label'] = 'danger';
-								$etat['valeur'] = 'Inactif';
-							}
-							echo "<tr>";
-							echo "<td id=". $id .">" . $row['libelle'] . "</td>";
-							echo "<td id=". $id .">" . $row['addr'] . "</td>";
-							echo "<td id=". $id ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
-							echo "<td id=". $id ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['id']."\"><img src=\"../img/remove.png\" alt=\"Retirer périphérique\"></a></td>";
-							echo "</tr>";
-						}
-					}
-					?>
-				</tbody>
-			</table>
-		</div>
-
-		<!-- Ajouter Periph -->
-
-
-		<div class="page-header">
-			<h1>Ajouter périphérique</h1>
-		</div>
-		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
+
 				<div class="well">
+
 					<form id="addmacform" class="form-horizontal" role="form" method="post" action="../controlers/addmac.php">
 						<label class="control-label" for="mac">Attention à ne pas se tromper !</label>
 						<input id='txtmac' name="macAddr" type="text" class="form-control" placeholder="Adresse MAC">
 						<label class="control-label" for="mac">Libellé:</label>
 						<input id='txtlib' name="Libelle" type="text" class="form-control" placeholder="">
 						<hr>
-						<center><button type="submit" class="btn btn-default">Ajouter</button></center>
+						<center><button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-phone" style="color: #333;" aria-hidden="true"></span>  Ajouter</button></center>
 					</form>
 				</div>
 			</div>

@@ -1,23 +1,44 @@
 <?php
 
-include './Bdd.php';
 
+include './Bdd.php';
 session_start();
 
+// Récupération des variables POST
 $idEtu = $_SESSION['ID'];
 $mac = $_POST['macAddr'];
-$libelle = $_POST['Libelle'];
+
+$libelle = null;
+if (empty($_POST['Libelle'])){
+	 $libelle = 'Nouveau périphérique';
+}
+else{
+	$libelle = $_POST['Libelle'];
+}
+
 
 $db = new Bdd();
 
-try {
-  $db->addMac($idEtu, $mac, $libelle);
-  $_SESSION['erreurMac'] = 'Mauvaise adresse MAC !';
-  header('location:../view/peripherique.php');
+if ($db->addMac($idEtu, $mac, $libelle) != 0){
+	$_SESSION['erreurMac'] = true;
+}
+else{
+	// Ajout avec succès
+	if (isset($_SESSION['erreurMac'])){
+		unset($_SESSION['erreurMac']);
+	}
+
+	// Inclusion
+	include './scriptPowerShell.php';
+	reserveAdresseDHCP(111,534564156461,"test","test");
+	supprimeAdresseDHCP("test",534564156461);
+	reserveAdresseCisco(534564156461);
+	supprimeAdresseCisco();
 
 }
-catch (Exception $e) {
-  echo 'Erreur dans l\'appele de la methode d\'ajout d\'adresse MAC: ' . $e->getMessage();
-}
+
+
+header('location:../view/peripherique.php');
+
 
 ?>

@@ -16,3 +16,30 @@ body {
    padding-top: 60px;
    outline: none;
  }
+
+#bg_auth {
+	background: url("http://i.imgur.com/geDlcbx.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    border-left-color: #1b809e;
+}
+
+#nav_title {
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 1.6em;
+}
+
+.panel-info{
+    box-shadow: 0 0 1em rgba(33, 33, 33, 0.2);
+}

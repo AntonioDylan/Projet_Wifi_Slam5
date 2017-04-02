@@ -7,12 +7,11 @@ session_start();
 
 
 <!DOCTYPE html>
-<html lang="fr">
-   <head>
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <link rel="stylesheet" href="../css/styles.css">
-   </head>
-   <body>
+<html  lang="fr">
+   <?php 
+      include("header.php");
+   ?>
+   <body id="bg_auth">
       <?php 
          include("nav.php");
       ?>
@@ -29,7 +28,8 @@ session_start();
                if (isset($_SESSION['ERREUR']) && $_SESSION['ERREUR'] == 'T'){ 
                   
                   ?>
-                  <div id="unknow" class="alert alert-danger" style="margin:20px;margin-bottom:0px;"role="alert">
+                  <div id="unknow" class="alert alert-danger alert-dismissable fade in" style="margin:20px;margin-bottom:0px;"role="alert">
+                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                      <center>Compte inexistant !</center>
                   </div>
 
@@ -38,7 +38,7 @@ session_start();
                }
                ?>
                <div class="alert alert-success" style="margin:20px;margin-bottom:0px;"role="alert">
-
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   <center><i class="glyphicon glyphicon-lock"></i> Utilisez les identifiants du <strong>Livret de compétences SIO</strong>.</center>
                </div>
 

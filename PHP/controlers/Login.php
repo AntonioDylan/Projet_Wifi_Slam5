@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Login
 {
   public function __construct($mail, $password, $cnx)
