@@ -139,10 +139,13 @@ include("header.php");
 				<div class="well">
 
 					<form id="addmacform" class="form-horizontal" role="form" method="post" action="../controlers/addmac.php">
-						<label class="control-label" for="mac">Attention à ne pas se tromper !</label>
+						<label class="control-label" for="macAddr">Attention à ne pas se tromper !</label>
 						<input id='txtmac' name="macAddr" type="text" class="form-control" placeholder="Adresse MAC">
-						<label class="control-label" for="mac">Libellé:</label>
+						<label class="control-label" for="Libelle">Libellé:</label>
 						<input id='txtlib' name="Libelle" type="text" class="form-control" placeholder="">
+						<label class="control-label" for="chkRep">Remplacer un existant ?</label>
+						<input name="chkRep" type="checkbox" aria-label="...">
+						<!-- A implémenter... -->
 						<hr>
 						<center><button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-phone" style="color: #333;" aria-hidden="true"></span>  Ajouter</button></center>
 					</form>
