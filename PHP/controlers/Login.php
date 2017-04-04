@@ -16,6 +16,7 @@ class Login
       $_SESSION['NOM'] = $result['nom'];
       $_SESSION['PRENOM'] = $result['prenom'];
       $_SESSION['ID'] = $result['num'];
+      $_SESSION['ADMIN'] = $result['admin'];
       $_SESSION['USER_SESSION'] = hash('sha256', $mail, false);
       $_SESSION['ERREUR'] = 'F';
       $_SESSION['ROLE'] = '0';
@@ -29,6 +30,7 @@ class Login
         $_SESSION['NOM'] = $result['nom'];
         $_SESSION['PRENOM'] = $result['prenom'];
         $_SESSION['ID'] = $result['num'];
+        $_SESSION['ADMIN'] = $result['admin'];
         $_SESSION['USER_SESSION'] = hash('sha256', $mail, false);
         $_SESSION['ERREUR'] = 'F';
         $_SESSION['ROLE'] = '1';

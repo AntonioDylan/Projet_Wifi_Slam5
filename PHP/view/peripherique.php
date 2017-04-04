@@ -30,14 +30,22 @@ include("header.php");
 		}
 
 		// Requête
+
+		if($_SESSION['ROLE'] == '0'){
+			$tableName = "port_etudiant";
+		}
+		else{
+			$tableName = "port_professeur";
+		}
+
 		$db = new Bdd();
-		$id = $_SESSION['ID'];
+		$idMel = $_SESSION['MAIL'];
 		$query = $db->pdo->prepare('select *
 			from adresse_mac
-			inner join port_etudiant on port_etudiant.num = adresse_mac.numEtudiant
-			where adresse_mac.numEtudiant=:num');
+			inner join '.$tableName.' on idMel = mel
+			where idMel=:num');
 
-		$query->bindParam(':num', $id, PDO::PARAM_INT);
+		$query->bindParam(':num', $idMel, PDO::PARAM_STR);
 		$query->execute();
 
 			// Aucune adresse MAC
@@ -89,17 +97,17 @@ include("header.php");
 									$etat['valeur'] = 'Inactif';
 								}
 								echo "<tr>";
-								echo "<td id=". $id .">" . $row['libelle'] . "</td>";
-								echo "<td id=". $id .">" . $row['addr'] . "</td>";
+								echo "<td id=". $idMel .">" . $row['libelle'] . "</td>";
+								echo "<td id=". $idMel .">" . $row['addr'] . "</td>";
 
 								$date = $row['date'];
 								$timestamp = strtotime($date);
 								$date_formated = date('Y-m-d H:i:s', $timestamp);
 								//echo $date_formated;
-								echo "<td id=". $id .">Le " . $row['date']  . " à " . $date[1] . "</td>";
+								echo "<td id=". $idMel .">Le " . $row['date']  . " à " . $date[1] . "</td>";
 								
-								echo "<td id=". $id ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
-								echo "<td id=". $id ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['id']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
+								echo "<td id=". $idMel ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
+								echo "<td id=". $idMel ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['idMel']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
 								echo "</tr>";
 							}
 						}

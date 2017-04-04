@@ -58,15 +58,15 @@ class Bdd
 
   public function removeMac($id){
 
-    $query =  $this->pdo->prepare('DELETE FROM adresse_mac WHERE id=:num');
+    $query =  $this->pdo->prepare('DELETE FROM adresse_mac WHERE idMel=:num');
 
-		$query->bindParam(':num', $id, PDO::PARAM_INT);
+		$query->bindParam(':num', $id, PDO::PARAM_STR);
 		$query->execute();
   }
 
 
 
-  public function addMac($idEtu, $mac, $libelle){
+  public function addMac($idMel, $mac, $libelle){
 
     $check = $this->macCheck($mac);
     echo $check;
@@ -77,8 +77,8 @@ class Bdd
     else{
       $mac = $check;
       $date = new DateTime();
-      $query =  $this->pdo->prepare('INSERT INTO adresse_mac (id, numEtudiant, libelle, addr, etat) VALUES (null, :num, :libelle, :macAdd, 0)');
-      $query->bindParam(':num', $idEtu, PDO::PARAM_INT);
+      $query =  $this->pdo->prepare('INSERT INTO adresse_mac (id, idMel, libelle, addr, etat) VALUES (null, :num, :libelle, :macAdd, 0)');
+      $query->bindParam(':num', $idMel, PDO::PARAM_STR);
       $query->bindParam(':macAdd', $mac, PDO::PARAM_STR);
       $query->bindParam(':libelle', $libelle, PDO::PARAM_STR);
 

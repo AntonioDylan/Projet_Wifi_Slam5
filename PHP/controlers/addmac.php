@@ -5,7 +5,7 @@ include './Bdd.php';
 session_start();
 
 // Récupération des variables POST
-$idEtu = $_SESSION['ID'];
+$idMel = $_SESSION['MAIL'];
 $mac = $_POST['macAddr'];
 
 $libelle = null;
@@ -19,7 +19,7 @@ else{
 
 $db = new Bdd();
 
-if ($db->addMac($idEtu, $mac, $libelle) != 0){
+if ($db->addMac($idMel, $mac, $libelle) != 0){
 	$_SESSION['erreurMac'] = true;
 }
 else{
