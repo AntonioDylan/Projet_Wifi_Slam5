@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 24 Mars 2017 à 10:48
+-- Généré le :  Mar 04 Avril 2017 à 18:05
 -- Version du serveur :  10.1.21-MariaDB
--- Version de PHP :  7.1.1
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,19 +28,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `adresse_mac` (
   `id` int(11) NOT NULL,
-  `numEtudiant` int(11) NOT NULL,
+  `idMel` varchar(255) NOT NULL,
   `libelle` char(32) NOT NULL,
   `addr` char(12) NOT NULL,
-  `etat` int(1) NOT NULL
+  `etat` int(1) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `adresse_mac`
 --
 
-INSERT INTO `adresse_mac` (`id`, `numEtudiant`, `libelle`, `addr`, `etat`) VALUES
-(2, 1, 'PC-Remy', '112233445566', 1),
-(7, 1, 'bonjour', '112233445566', 0);
+INSERT INTO `adresse_mac` (`id`, `idMel`, `libelle`, `addr`, `etat`, `date`) VALUES
+(5, 'cascales.arthur@gmail.com', 'PC-acer', '112233445566', 0, '2017-04-04 15:41:58'),
+(6, 'cascales.arthur@gmail.com', 'Honor 5x', '665544332211', 0, '2017-04-04 15:42:03');
 
 -- --------------------------------------------------------
 
@@ -56,15 +57,16 @@ CREATE TABLE `port_etudiant` (
   `mel` char(64) NOT NULL,
   `mdp` char(32) NOT NULL,
   `numexam` char(16) DEFAULT NULL,
-  `valide` char(1) NOT NULL DEFAULT 'O'
+  `valide` char(1) NOT NULL DEFAULT 'O',
+  `admin` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `port_etudiant`
 --
 
-INSERT INTO `port_etudiant` (`num`, `numGroupe`, `nom`, `prenom`, `mel`, `mdp`, `numexam`, `valide`) VALUES
-(1, NULL, 'Laot', 'Remy', 'remy.laot@gmail.com', 'test', NULL, 'O');
+INSERT INTO `port_etudiant` (`num`, `numGroupe`, `nom`, `prenom`, `mel`, `mdp`, `numexam`, `valide`, `admin`) VALUES
+(1, NULL, 'cascales', 'arthur', 'cascales.arthur@gmail.com', 'aaa', NULL, 'O', 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +81,8 @@ CREATE TABLE `port_professeur` (
   `mel` char(64) NOT NULL,
   `mdp` char(32) NOT NULL,
   `niveau` int(11) NOT NULL,
-  `valide` char(1) DEFAULT 'O'
+  `valide` char(1) DEFAULT 'O',
+  `admin` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -91,7 +94,7 @@ CREATE TABLE `port_professeur` (
 --
 ALTER TABLE `adresse_mac`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `numEtudiant` (`numEtudiant`);
+  ADD KEY `numEtudiant` (`idMel`);
 
 --
 -- Index pour la table `port_etudiant`
@@ -114,7 +117,7 @@ ALTER TABLE `port_professeur`
 -- AUTO_INCREMENT pour la table `adresse_mac`
 --
 ALTER TABLE `adresse_mac`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `port_etudiant`
 --
@@ -125,16 +128,6 @@ ALTER TABLE `port_etudiant`
 --
 ALTER TABLE `port_professeur`
   MODIFY `num` int(11) NOT NULL AUTO_INCREMENT;
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `adresse_mac`
---
-ALTER TABLE `adresse_mac`
-  ADD CONSTRAINT `adresse_mac_ibfk_1` FOREIGN KEY (`numEtudiant`) REFERENCES `port_etudiant` (`num`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
