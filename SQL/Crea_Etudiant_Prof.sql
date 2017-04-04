@@ -29,5 +29,5 @@ CREATE TABLE  adresse_mac  (
   addr  char(12) NOT NULL,
   etat int(1) NOT NULL,
   PRIMARY KEY (id),
- FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num),
+ FOREIGN KEY (numEtudiant) REFERENCES port_etudiant(num)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

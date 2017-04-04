@@ -5,7 +5,7 @@ class Bdd
 {
   private $host = 'localhost';
   private $username = 'root';
-  private $password = 'root';
+  private $password = '';
   private $bdd = 'wifi';
   public $pdo = null;
 
@@ -50,7 +50,7 @@ class Bdd
           }
       }
       $macPur = strtolower($macPur);
-      echo "<script>alert(\"la variable est nulle\")</script>"; 
+      //echo "<script>alert(\"la variable est nulle\")</script>"; 
 
       return $macPur;
 
@@ -77,11 +77,10 @@ class Bdd
     else{
       $mac = $check;
       $date = new DateTime();
-      $query =  $this->pdo->prepare('INSERT INTO adresse_mac (id, numEtudiant, libelle, addr, date, etat) VALUES (null, :num, :libelle, :macAdd, :now, 0)');
+      $query =  $this->pdo->prepare('INSERT INTO adresse_mac (id, numEtudiant, libelle, addr, etat) VALUES (null, :num, :libelle, :macAdd, 0)');
       $query->bindParam(':num', $idEtu, PDO::PARAM_INT);
       $query->bindParam(':macAdd', $mac, PDO::PARAM_STR);
       $query->bindParam(':libelle', $libelle, PDO::PARAM_STR);
-      $query->bindParam('now', date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR);
 
       $query->execute();
       return 0;
