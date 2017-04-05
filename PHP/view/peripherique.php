@@ -64,7 +64,7 @@ include("header.php");
 				<div class="panel-heading"><strong>
 					<?php
 					if(isset($_SESSION['NOM'])){
-						echo $_SESSION['NOM'].' '.$_SESSION['PRENOM'];
+						echo $_SESSION['NOM'].' '.$_SESSION['PRENOM']. ' - '. (($_SESSION['ROLE'] == '0') ? "étudiant" : "professeur" );
 					}
 					?></strong>
 				</div>
@@ -104,7 +104,7 @@ include("header.php");
 								$timestamp = strtotime($date);
 								$date_formated = date('Y-m-d H:i:s', $timestamp);
 								//echo $date_formated;
-								echo "<td id=". $idMel .">Le " . $row['date']  . " à " . $date[1] . "</td>";
+								echo "<td id=". $idMel .">Le " . $row['date'] . "</td>";
 								
 								echo "<td id=". $idMel ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
 								echo "<td id=". $idMel ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['idMel']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
