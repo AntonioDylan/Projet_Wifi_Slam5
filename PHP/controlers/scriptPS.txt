@@ -110,3 +110,19 @@ Add-DhcpServerv4Reservation -ScopeId 10.10.0.0 -IPAddress 10.10.130.111 -ClientI
 Remove-DhcpServerv4Reservation -ComputerName "test" -ScopeId 10.10.0.0 -ClientId 534564156461
 nvram set wlan0_ssid0_acl_list=534564156461,unknown,1\;
 nvram set wlan0_ssid0_acl_list=,unknown,1\;
+Add-DhcpServerv4Reservation -ScopeId 10.10.0.0 -IPAddress 10.10.130.111 -ClientId 534564156461 -Description "test" -Name "test"
+Remove-DhcpServerv4Reservation -ComputerName "test" -ScopeId 10.10.0.0 -ClientId 534564156461
+nvram set wlan0_ssid0_acl_list=534564156461,unknown,1\;
+nvram set wlan0_ssid0_acl_list=,unknown,1\;
+Add-DhcpServerv4Reservation -ScopeId 10.10.0.0 -IPAddress 10.10.130.111 -ClientId 534564156461 -Description "test" -Name "test"
+Remove-DhcpServerv4Reservation -ComputerName "test" -ScopeId 10.10.0.0 -ClientId 534564156461
+nvram set wlan0_ssid0_acl_list=534564156461,unknown,1\;
+nvram set wlan0_ssid0_acl_list=,unknown,1\;
+Add-DhcpServerv4Reservation -ScopeId 10.10.0.0 -IPAddress 10.10.130.111 -ClientId 534564156461 -Description "test" -Name "test"
+Remove-DhcpServerv4Reservation -ComputerName "test" -ScopeId 10.10.0.0 -ClientId 534564156461
+nvram set wlan0_ssid0_acl_list=534564156461,unknown,1\;
+nvram set wlan0_ssid0_acl_list=,unknown,1\;
+Add-DhcpServerv4Reservation -ScopeId 10.10.0.0 -IPAddress 10.10.130.111 -ClientId 534564156461 -Description "test" -Name "test"
+Remove-DhcpServerv4Reservation -ComputerName "test" -ScopeId 10.10.0.0 -ClientId 534564156461
+nvram set wlan0_ssid0_acl_list=534564156461,unknown,1\;
+nvram set wlan0_ssid0_acl_list=,unknown,1\;

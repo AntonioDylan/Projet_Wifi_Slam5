@@ -19,7 +19,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> Administration<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="admin_peripherique.php"><i class="glyphicon glyphicon-hdd"></i>  Périphérique(s)</a></li>
-                <li><a href="#about"><i class="glyphicon glyphicon-user"></i>  Utilisateur(s)</a></li>
+                <li><a href="admin_utilisateur.php"><i class="glyphicon glyphicon-user"></i>  Utilisateur(s)</a></li>
               </ul>
             </li>
 
