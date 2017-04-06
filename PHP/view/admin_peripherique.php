@@ -1,7 +1,7 @@
 <?php
 require('../controlers/Bdd.php');
 session_start();
-
+if($_SESSION['ADMIN'] == '1'){
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -81,7 +81,7 @@ include("header.php");
 						if($queryEtudiant->rowCount() > 0) {
 							while($row = $queryEtudiant->fetch(PDO::FETCH_ASSOC)) {
 
-																echo "<tr>";
+								echo "<tr>";
 								echo "<td>" . $row['nom']. ' '. $row['prenom'] . "</td>";
 								echo "<td>" . "Etudiant" . "</td>";
 								echo "<td>" . $row['libelle']. "</td>";								
@@ -91,14 +91,17 @@ include("header.php");
 								$timestamp = strtotime($date);
 								$date_formated = date('Y-m-d H:i:s', $timestamp);							
 								echo "<td>" . $row['date'] . "</td>";								
-								echo "<td> Valider/Refuser </td>";								
+								echo "<td>
+											<a href=\" ../controlers/changeMacStatut.php?ac=0&idMac=". $row['id'] . "\"><button type=\"button\" class=\"btn btn-success\">Accepter</button></a>
+										    <a href=\" ../controlers/changeMacStatut.php?ac=1&idMac=". $row['id'] . "\"><button type=\"button\" class=\"btn btn-danger\">Refuser</button></a>
+									</td>";								
 								echo "</tr>";
 							}
 						}
 						if($queryProfesseur->rowCount() > 0) {
 							while($row = $queryProfesseur->fetch(PDO::FETCH_ASSOC)) {
 
-																echo "<tr>";
+								echo "<tr>";
 								echo "<td>" . $row['nom']. ' '. $row['prenom'] . "</td>";
 								echo "<td>" . "Professeur" . "</td>";
 								echo "<td>" . $row['libelle']. "</td>";								
@@ -128,3 +131,10 @@ include("header.php");
 	<!-- Footer -->
 	<?php include("footer.php") ?>
 </body>
+
+<?php
+}
+else{
+	header('location:../index.php');
+}
+?>

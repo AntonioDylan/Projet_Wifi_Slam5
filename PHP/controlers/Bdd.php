@@ -58,7 +58,15 @@ class Bdd
 
   public function removeMac($id){
 
-    $query =  $this->pdo->prepare('DELETE FROM adresse_mac WHERE idMel=:num');
+    $query =  $this->pdo->prepare('DELETE FROM adresse_mac WHERE id=:num');
+
+		$query->bindParam(':num', $id, PDO::PARAM_STR);
+		$query->execute();
+  }
+
+    public function setActifMac($id){
+
+    $query =  $this->pdo->prepare('UPDATE adresse_mac SET etat = 1 WHERE id=:num');
 
 		$query->bindParam(':num', $id, PDO::PARAM_STR);
 		$query->execute();

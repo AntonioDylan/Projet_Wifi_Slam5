@@ -107,7 +107,7 @@ include("header.php");
 								echo "<td id=". $idMel .">Le " . $row['date'] . "</td>";
 								
 								echo "<td id=". $idMel ."><span class=\"label label-". $etat['label'] ."\">" . $etat['valeur'] . "</span></td>";
-								echo "<td id=". $idMel ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['idMel']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
+								echo "<td id=". $idMel ." class=\"text-center\"><a href=\"../controlers/removeMac.php?idMac=".$row['id']."\" alt=\"Retirer périphérique\"><i class=\"glyphicon glyphicon-remove\" style=\"color:red;font-size: 1.5em;\"></i></a></td>";
 								echo "</tr>";
 							}
 						}
